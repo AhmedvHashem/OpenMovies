@@ -55,7 +55,6 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.paging)
     implementation(libs.androidx.paging.compose)
-    implementation(libs.androidx.paging.room)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.serialization)
@@ -63,6 +62,7 @@ dependencies {
     implementation(libs.okhttp.logging)
     implementation(libs.room)
     implementation(libs.room.ktx)
+    implementation(libs.room.paging)
     ksp(libs.room.compiler)
 
     debugImplementation(platform(libs.androidx.compose.bom))
