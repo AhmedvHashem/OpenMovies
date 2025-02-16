@@ -9,5 +9,4 @@ data class Movie(
 
     val backdropPath: String,
     val posterPath: String,
-    val video: Boolean,
 )
