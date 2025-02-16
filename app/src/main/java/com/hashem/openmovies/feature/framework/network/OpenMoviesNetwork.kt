@@ -23,8 +23,8 @@ abstract class OpenMoviesNetwork {
 
         private fun provideNetwork(): OpenMoviesNetwork {
             val client: OkHttpClient = OkHttpClient.Builder()
-                .addInterceptor(LogInterceptor.debug())
                 .addInterceptor(AuthInterceptor(Constants.API_TOKEN))
+                .addInterceptor(LogInterceptor.debug())
                 .build()
 
             val retrofit = Retrofit.Builder()
