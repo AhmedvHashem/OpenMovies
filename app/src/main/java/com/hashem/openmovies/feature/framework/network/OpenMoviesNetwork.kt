@@ -2,15 +2,15 @@ package com.hashem.openmovies.feature.framework.network
 
 import com.hashem.openmovies.Constants
 import com.hashem.openmovies.feature.data.remote.MovieRemoteDataSource
+import com.hashem.openmovies.feature.framework.network.interceptors.AuthInterceptor
+import com.hashem.openmovies.feature.framework.network.interceptors.LogInterceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
 abstract class OpenMoviesNetwork {
     abstract fun dataSource(): MovieRemoteDataSource
 
     companion object {
-        private const val BASE_URL = Constants.BASE_URL
 
         @Volatile
         private var INSTANCE: OpenMoviesNetwork? = null
@@ -22,15 +22,14 @@ abstract class OpenMoviesNetwork {
 
 
         private fun provideNetwork(): OpenMoviesNetwork {
-            val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
             val client: OkHttpClient = OkHttpClient.Builder()
-                .addInterceptor(logging)
+                .addInterceptor(LogInterceptor.debug())
+                .addInterceptor(AuthInterceptor(Constants.API_TOKEN))
                 .build()
 
             val retrofit = Retrofit.Builder()
                 .client(client)
-                .baseUrl(BASE_URL)
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(Converter.json())
                 .build()
 

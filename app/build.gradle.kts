@@ -55,6 +55,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.paging)
     implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.paging.room)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.serialization)

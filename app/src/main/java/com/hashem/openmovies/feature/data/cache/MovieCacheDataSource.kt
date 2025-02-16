@@ -9,9 +9,12 @@ import com.hashem.openmovies.feature.data.models.MovieData
 @Dao
 interface MovieCacheDataSource {
 
-    @Query("SELECT * FROM MovieData")
-    suspend fun getWords(): List<MovieData>
+    @Query("SELECT * FROM MovieData where sources LIKE '%' || :source || '%'")
+    suspend fun getMovies(source: String): List<MovieData>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertWord(movieData: MovieData)
+    suspend fun insertMovies(movies: List<MovieData>)
+
+    @Query("DELETE FROM MovieData")
+    suspend fun clearAll()
 }

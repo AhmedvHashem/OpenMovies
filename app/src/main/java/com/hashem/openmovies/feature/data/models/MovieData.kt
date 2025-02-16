@@ -22,7 +22,7 @@ data class MovieData(
     val releaseDate: String,
 
     @SerialName("backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @SerialName("poster_path")
     val posterPath: String,
     @SerialName("video")
@@ -39,7 +39,7 @@ fun MovieData.toMovie(): Movie {
         overview = overview,
         releaseDate = releaseDate,
 
-        backdropPath = backdropPath,
+        backdropPath = backdropPath ?: posterPath,
         posterPath = posterPath,
         video = video,
     )

@@ -3,16 +3,13 @@ package com.hashem.openmovies.feature.data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.map
 import com.hashem.openmovies.feature.data.cache.MovieCacheDataSource
-import com.hashem.openmovies.feature.data.models.toMovie
-import com.hashem.openmovies.feature.data.remote.MovieRemoteDataSource
 import com.hashem.openmovies.feature.data.paging.NowPlayingMoviesSource
-import com.hashem.openmovies.feature.domain.repository.MovieRepository
+import com.hashem.openmovies.feature.data.remote.MovieRemoteDataSource
 import com.hashem.openmovies.feature.domain.models.Movie
 import com.hashem.openmovies.feature.domain.models.MovieSource
+import com.hashem.openmovies.feature.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class DefaultMovieRepository(
     private val cacheDataSource: MovieCacheDataSource,
@@ -29,10 +26,6 @@ class DefaultMovieRepository(
                     MovieSource.Upcoming -> TODO()
                 }
             }
-        ).flow.map { pagingData ->
-            pagingData.map {
-                it.toMovie()
-            }
-        }
+        ).flow
     }
 }
