@@ -40,22 +40,21 @@ class MainActivity : ComponentActivity() {
         setContent {
             OpenMoviesTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
 
                     val items = viewModel.getNowPlayingMovies().collectAsLazyPagingItems()
 
                     LazyColumn(
                         modifier = Modifier
+                            .padding(innerPadding)
                             .fillMaxWidth(),
                     ) {
                         items(items.itemCount) {
                             val item = items[it]
                             if (item != null) {
                                 Text(
-                                    modifier = Modifier.fillMaxWidth().padding(12.dp),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(12.dp),
                                     text = item.originalTitle,
                                     style = MaterialTheme.typography.bodyMedium,
                                 )
@@ -167,6 +166,14 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    OpenMoviesTheme {
+        Greeting("Android")
+    }
+}
+
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -175,10 +182,3 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    OpenMoviesTheme {
-        Greeting("Android")
-    }
-}

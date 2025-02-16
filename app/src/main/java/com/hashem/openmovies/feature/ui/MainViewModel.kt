@@ -28,7 +28,7 @@ class MainViewModel(
 
                 val cache = db.dataSource()
                 val remote = network.dataSource()
-                val repo = DefaultMovieRepository(cache, remote)
+                val repo = DefaultMovieRepository(db, cache, remote)
 
                 MainViewModel(
                     GetNowPlayingMoviesUseCase(repo),
