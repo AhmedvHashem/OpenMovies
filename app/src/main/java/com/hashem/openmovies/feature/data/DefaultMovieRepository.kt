@@ -8,6 +8,7 @@ import androidx.paging.map
 import androidx.room.RoomDatabase
 import com.hashem.openmovies.feature.data.cache.MovieCacheDataSource
 import com.hashem.openmovies.feature.data.models.toMovie
+import com.hashem.openmovies.feature.data.models.toMovieSourceData
 import com.hashem.openmovies.feature.data.remote.MovieRemoteDataSource
 import com.hashem.openmovies.feature.domain.models.Movie
 import com.hashem.openmovies.feature.domain.models.MovieSource
@@ -26,7 +27,7 @@ class DefaultMovieRepository(
         return Pager(
             config = PagingConfig(pageSize = 20),
             remoteMediator = DefaultMovieMediator(
-                source.toString(),
+                source.toMovieSourceData(),
                 db,
                 cacheDataSource,
                 remoteDataSource

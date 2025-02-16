@@ -8,13 +8,14 @@ import androidx.room.RoomDatabase
 import androidx.room.withTransaction
 import com.hashem.openmovies.feature.data.cache.MovieCacheDataSource
 import com.hashem.openmovies.feature.data.models.MovieData
+import com.hashem.openmovies.feature.data.models.MovieSourceData
 import com.hashem.openmovies.feature.data.remote.MovieRemoteDataSource
 import retrofit2.HttpException
 import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
 class DefaultMovieMediator(
-    private val source: String,
+    private val source: MovieSourceData,
     private val db: RoomDatabase,
     private val cacheDataSource: MovieCacheDataSource,
     private val remoteDataSource: MovieRemoteDataSource
@@ -46,13 +47,23 @@ class DefaultMovieMediator(
                 }
             }
 
-            val remoteData = remoteDataSource.getNowPlayerMovies(
-                page = nextPage,
-            ).results.map { it.copy(sources = setOf(source)) }
+            val remoteData = when (source) {
+                MovieSourceData.NowPlaying -> remoteDataSource.getNowPlayerMovies(
+                    page = nextPage,
+                )
+
+                MovieSourceData.Popular -> remoteDataSource.getPopularMovies(
+                    page = nextPage,
+                )
+
+                MovieSourceData.Upcoming -> remoteDataSource.getUpcomingMovies(
+                    page = nextPage,
+                )
+            }.results.map { it.copy(sources = setOf(source.toString())) }
 
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    cacheDataSource.clearAll(source)
+                    cacheDataSource.clearAll(source.toString())
                 }
                 cacheDataSource.insertMovies(remoteData)
             }
