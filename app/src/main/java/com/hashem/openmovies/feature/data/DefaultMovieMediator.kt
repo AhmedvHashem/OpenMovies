@@ -29,9 +29,7 @@ class DefaultMovieMediator(
     ): MediatorResult {
         return try {
             nextPage = when (loadType) {
-                LoadType.REFRESH -> {
-                    1
-                }
+                LoadType.REFRESH -> 1
 
                 LoadType.PREPEND -> return MediatorResult.Success(
                     endOfPaginationReached = true
@@ -74,6 +72,8 @@ class DefaultMovieMediator(
         } catch (e: IOException) {
             MediatorResult.Error(e)
         } catch (e: HttpException) {
+            MediatorResult.Error(e)
+        } catch (e: Exception) {
             MediatorResult.Error(e)
         }
     }
