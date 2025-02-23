@@ -32,7 +32,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
-import com.hashem.openmovies.Constants
 import com.hashem.openmovies.feature.ui.components.AppErrorView
 import com.hashem.openmovies.feature.ui.components.AppLoadingView
 
@@ -94,7 +93,7 @@ private fun MovieContent(movie: MovieUIModel) {
             Box {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
-                        .data(Constants.IMAGE_BASE_URL + movie.posterPath).crossfade(true)
+                        .data(movie.posterPath).crossfade(true)
                         .build(),
                     contentDescription = movie.title,
                     contentScale = ContentScale.Crop,

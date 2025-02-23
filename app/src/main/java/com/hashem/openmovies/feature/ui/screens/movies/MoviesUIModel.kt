@@ -1,6 +1,7 @@
 package com.hashem.openmovies.feature.ui.screens.movies
 
 import androidx.compose.runtime.Immutable
+import com.hashem.openmovies.Constants
 import com.hashem.openmovies.feature.domain.models.Movie
 
 @Immutable
@@ -15,5 +16,5 @@ fun Movie.toMoviesUIModel() = MoviesUIModel(
     id = id,
     title = title,
     releaseDate = releaseDate,
-    posterPath = posterPath,
+    posterPath = Constants.IMAGE_BASE_URL + posterPath,
 )
