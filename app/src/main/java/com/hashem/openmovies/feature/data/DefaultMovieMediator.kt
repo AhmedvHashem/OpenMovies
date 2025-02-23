@@ -29,8 +29,6 @@ class DefaultMovieMediator(
         state: PagingState<Int, MovieData>
     ): MediatorResult {
         return try {
-            delay(10000)
-
             nextPage = when (loadType) {
                 LoadType.REFRESH -> 1
 

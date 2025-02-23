@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.paging.cachedIn
+import androidx.paging.map
 import com.hashem.openmovies.feature.data.DefaultMovieRepository
 import com.hashem.openmovies.feature.domain.GetNowPlayingMoviesUseCase
 import com.hashem.openmovies.feature.domain.GetPopularMoviesUseCase
@@ -15,6 +16,7 @@ import com.hashem.openmovies.feature.framework.database.OpenMoviesDatabase
 import com.hashem.openmovies.feature.framework.network.OpenMoviesNetwork
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 
 class MoviesViewModel(
     private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase,
@@ -54,19 +56,25 @@ class MoviesViewModel(
 
     private fun getNowPlayingMovies() {
         _uiState.value = _uiState.value.copy(
-            nowPlayingMovies = getNowPlayingMoviesUseCase().cachedIn(viewModelScope)
+            nowPlayingMovies = getNowPlayingMoviesUseCase().map { pagingData ->
+                pagingData.map { it.toMoviesUIModel() }
+            }.cachedIn(viewModelScope)
         )
     }
 
     private fun getPopularMovies() {
         _uiState.value = _uiState.value.copy(
-            popularMovies = getPopularMoviesUseCase().cachedIn(viewModelScope)
+            popularMovies = getPopularMoviesUseCase().map { pagingData ->
+                pagingData.map { it.toMoviesUIModel() }
+            }.cachedIn(viewModelScope)
         )
     }
 
     private fun getUpcomingMovies() {
         _uiState.value = _uiState.value.copy(
-            upcomingMovies = getUpcomingMoviesUseCase().cachedIn(viewModelScope)
+            upcomingMovies = getUpcomingMoviesUseCase().map { pagingData ->
+                pagingData.map { it.toMoviesUIModel() }
+            }.cachedIn(viewModelScope)
         )
     }
 }

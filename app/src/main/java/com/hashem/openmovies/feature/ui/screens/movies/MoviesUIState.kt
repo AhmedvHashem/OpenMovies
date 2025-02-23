@@ -1,12 +1,13 @@
 package com.hashem.openmovies.feature.ui.screens.movies
 
+import androidx.compose.runtime.Stable
 import androidx.paging.PagingData
-import com.hashem.openmovies.feature.domain.models.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
+@Stable
 data class MoviesUIState(
-    val upcomingMovies: Flow<PagingData<Movie>> = emptyFlow(),
-    val nowPlayingMovies: Flow<PagingData<Movie>> = emptyFlow(),
-    val popularMovies: Flow<PagingData<Movie>> = emptyFlow(),
+    val upcomingMovies: Flow<PagingData<MoviesUIModel>> = emptyFlow(),
+    val nowPlayingMovies: Flow<PagingData<MoviesUIModel>> = emptyFlow(),
+    val popularMovies: Flow<PagingData<MoviesUIModel>> = emptyFlow(),
 )
