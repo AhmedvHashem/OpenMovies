@@ -14,5 +14,4 @@ class Converter {
     fun fromStringToSetString(value: String): Set<String> {
         return Json.decodeFromString(value)
     }
-
 }

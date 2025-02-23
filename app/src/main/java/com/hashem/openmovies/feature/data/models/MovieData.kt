@@ -1,6 +1,7 @@
 package com.hashem.openmovies.feature.data.models
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.hashem.openmovies.feature.domain.models.Movie
 import kotlinx.serialization.SerialName
@@ -17,7 +18,7 @@ data class MovieData(
     @SerialName("id")
     val id: Int,
     @SerialName("title")
-    val originalTitle: String?,
+    val title: String?,
     @SerialName("original_language")
     val originalLanguage: String?,
     @SerialName("overview")
@@ -31,17 +32,32 @@ data class MovieData(
     val posterPath: String?,
 
     val sources: Set<String> = emptySet(),
+) {
+    @Ignore
+    var runtime: Int? = 0
+
+    @Ignore
+    var genres: List<MovieGenre>? = emptyList()
+}
+
+@Serializable
+data class MovieGenre(
+    val id: Int,
+    val name: String
 )
 
 fun MovieData.toMovie(): Movie {
     return Movie(
         id = id,
-        originalTitle = originalTitle ?: "",
-        originalLanguage = originalLanguage ?: "",
+        title = title ?: "",
+        language = originalLanguage ?: "",
         overview = overview ?: "",
         releaseDate = releaseDate ?: "",
 
         backdropPath = backdropPath ?: "",
-        posterPath = posterPath ?: ""
+        posterPath = posterPath ?: "",
+
+        runtime = runtime ?: 0,
+        genres = genres?.map { it.name } ?: emptyList(),
     )
 }

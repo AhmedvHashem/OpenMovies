@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
@@ -81,7 +83,13 @@ fun MovieScreen(
 
 @Composable
 private fun MovieContent(movie: Movie, onBackClick: () -> Unit) {
-    Column {
+    val scrollState = rememberScrollState()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState)
+    ) {
         Card(
             modifier = Modifier
                 .height(500.dp)
@@ -92,7 +100,7 @@ private fun MovieContent(movie: Movie, onBackClick: () -> Unit) {
                     model = ImageRequest.Builder(LocalContext.current)
                         .data(Constants.IMAGE_BASE_URL + movie.posterPath).crossfade(true)
                         .build(),
-                    contentDescription = movie.originalTitle,
+                    contentDescription = movie.title,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .align(Alignment.TopStart)
@@ -120,18 +128,37 @@ private fun MovieContent(movie: Movie, onBackClick: () -> Unit) {
                             .padding(12.dp)
                     ) {
                         Text(
-                            text = movie.originalTitle,
+                            text = movie.title,
                             color = MaterialTheme.colorScheme.onBackground,
                         )
-                        Text(
-                            text = movie.releaseDate,
-                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
-                        )
+
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = "Released: ${movie.releaseDate}",
+                                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                            )
+
+                            Text(
+                                text = "Runtime: ${movie.runtime} minutes",
+                                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f),
+                            )
+                        }
                     }
                 }
             }
         }
-//            GenreChips(movie.genres)
+
+        Text(
+            modifier = Modifier.padding(8.dp),
+            text = movie.overview,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+
+        GenreChips(movie.genres)
     }
 }
 
@@ -139,7 +166,7 @@ private fun MovieContent(movie: Movie, onBackClick: () -> Unit) {
 private fun GenreChips(genres: List<String>) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.padding(vertical = 4.dp)
+        modifier = Modifier.padding(8.dp)
     ) {
         genres.forEach { genre ->
             SuggestionChip(

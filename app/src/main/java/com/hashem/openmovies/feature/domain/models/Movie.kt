@@ -2,11 +2,14 @@ package com.hashem.openmovies.feature.domain.models
 
 data class Movie(
     val id: Int,
-    val originalTitle: String,
-    val originalLanguage: String,
+    val title: String,
+    val language: String,
     val overview: String,
     val releaseDate: String,
 
     val backdropPath: String,
     val posterPath: String,
+
+    val runtime: Int = 0,
+    val genres: List<String>
 )

@@ -69,7 +69,7 @@ fun MoviesScreen(
                             model = ImageRequest.Builder(LocalContext.current)
                                 .data(Constants.IMAGE_BASE_URL + movie.posterPath).crossfade(true)
                                 .build(),
-                            contentDescription = movie.originalTitle,
+                            contentDescription = movie.title,
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .align(Alignment.TopStart)
@@ -97,7 +97,7 @@ fun MoviesScreen(
                                     .padding(12.dp)
                             ) {
                                 Text(
-                                    text = movie.originalTitle,
+                                    text = movie.title,
                                     color = MaterialTheme.colorScheme.onBackground,
                                 )
                                 Text(
