@@ -1,3 +1,6 @@
+import com.android.build.api.dsl.ApplicationBuildType
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.ksp)
@@ -7,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.hashem.opendictionary"
+    namespace = "com.hashem.openmovies"
     compileSdk = 35
 
     defaultConfig {
@@ -18,6 +21,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -27,6 +31,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            buildConfigSetup(this)
+        }
+        debug {
+            isMinifyEnabled = false
+
+            buildConfigSetup(this)
         }
     }
     compileOptions {
@@ -37,6 +48,7 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }
@@ -90,4 +102,11 @@ dependencies {
 
 tasks.withType<Test>().configureEach {
     jvmArgs("-javaagent:${mockitoAgent.asPath}")
+}
+
+fun buildConfigSetup(
+    applicationBuildType: ApplicationBuildType
+) {
+    val apiKey: String = gradleLocalProperties(rootDir, providers).getProperty("API_KEY") ?: ""
+    applicationBuildType.buildConfigField("String", "API_KEY", "\"$apiKey\"")
 }
