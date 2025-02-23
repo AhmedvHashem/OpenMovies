@@ -1,5 +1,6 @@
 [versions]
 agp = "8.8.1"
+coilNetworkOkhttp = "3.1.0"
 ksp = "2.0.21-1.0.27"
 kotlin = "2.1.0"
 kotlinSerialization = "1.8.0"
@@ -8,11 +9,13 @@ coreKtx = "1.15.0"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.0"
 composeBom = "2025.02.00"
+navigation = "2.8.7"
 
 paging = "3.3.6"
 retrofit = "2.11.0"
 okhttp = "4.12.0"
 room = "2.6.1"
+coil = "3.1.0"
 
 junit = "4.13.2"
 kotlinxCoroutinesTest = "1.10.1"
@@ -35,6 +38,7 @@ androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
 androidx-paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
 
@@ -47,17 +51,21 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
+coil = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
+
 testing-junit = { group = "junit", name = "junit", version.ref = "junit" }
 testing-kotlin = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 testing-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 mocking-mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
 mocking-mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 asserting-truth = { group = "com.google.truth", name = "truth", version.ref = "truth" }
+testing-compose-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 testing-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
 testing-androidx-espresso = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxEspressoCore" }
+testing-androidx-compose = { group = "androidx.compose.ui", name = "ui-test" }
 testing-androidx-compose-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-testing-androidx-compose-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

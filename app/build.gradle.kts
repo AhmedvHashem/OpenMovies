@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.paging)
     implementation(libs.androidx.paging.compose)
 
@@ -64,6 +65,8 @@ dependencies {
     implementation(libs.room.ktx)
     implementation(libs.room.paging)
     ksp(libs.room.compiler)
+    implementation(libs.coil)
+    implementation(libs.coil.okhttp)
 
     debugImplementation(platform(libs.androidx.compose.bom))
     debugImplementation(libs.androidx.ui.tooling)
@@ -76,11 +79,13 @@ dependencies {
     mockitoAgent(libs.mocking.mockito.core) { isTransitive = false }
     testImplementation(libs.mocking.mockito.kotlin)
     testImplementation(libs.asserting.truth)
+    testImplementation(platform(libs.androidx.compose.bom))
+    testImplementation(libs.testing.compose.junit4)
 
     androidTestImplementation(libs.testing.androidx.junit)
     androidTestImplementation(libs.testing.androidx.espresso)
     androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.testing.androidx.compose.junit4)
+    androidTestImplementation(libs.testing.androidx.compose)
 }
 
 tasks.withType<Test>().configureEach {
