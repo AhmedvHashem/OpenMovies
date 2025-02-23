@@ -7,9 +7,12 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.hashem.openmovies.feature.data.DefaultMovieRepository
+import com.hashem.openmovies.feature.data.remote.DefaultNetworkErrorHandler
 import com.hashem.openmovies.feature.domain.GetMovieUseCase
+import com.hashem.openmovies.feature.domain.repository.MovieError
 import com.hashem.openmovies.feature.framework.database.OpenMoviesDatabase
 import com.hashem.openmovies.feature.framework.network.OpenMoviesNetwork
+import com.hashem.openmovies.feature.ui.components.toAppError
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -28,7 +31,9 @@ class MovieViewModel(
 
                 val cache = db.dataSource()
                 val remote = network.dataSource()
-                val repo = DefaultMovieRepository(db, cache, remote)
+                val networkErrorHandler = DefaultNetworkErrorHandler()
+
+                val repo = DefaultMovieRepository(db, cache, remote, networkErrorHandler)
 
                 MovieViewModel(
                     GetMovieUseCase(repo),
@@ -46,7 +51,8 @@ class MovieViewModel(
             result.onSuccess { movie ->
                 _uiState.value = MovieUIState.Success(movie.toMovieUIModel())
             }.onFailure {
-                _uiState.value = MovieUIState.Error(it.message ?: "Unknown error")
+                it as MovieError
+                _uiState.value = MovieUIState.Error(it.toAppError())
             }
         }
     }

@@ -66,7 +66,7 @@ fun MovieScreen(
             }
 
             is MovieUIState.Error -> {
-                AppErrorView(error = uiState.message)
+                AppErrorView(error = uiState.error)
             }
 
             is MovieUIState.Success -> {

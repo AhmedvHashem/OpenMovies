@@ -10,6 +10,7 @@ import com.hashem.openmovies.feature.data.cache.MovieCacheDataSource
 import com.hashem.openmovies.feature.data.models.toMovie
 import com.hashem.openmovies.feature.data.models.toMovieSourceData
 import com.hashem.openmovies.feature.data.remote.MovieRemoteDataSource
+import com.hashem.openmovies.feature.data.remote.NetworkErrorHandler
 import com.hashem.openmovies.feature.domain.models.Movie
 import com.hashem.openmovies.feature.domain.models.MovieSource
 import com.hashem.openmovies.feature.domain.repository.MovieRepository
@@ -19,7 +20,8 @@ import kotlinx.coroutines.flow.map
 class DefaultMovieRepository(
     private val db: RoomDatabase,
     private val cacheDataSource: MovieCacheDataSource,
-    private val remoteDataSource: MovieRemoteDataSource
+    private val remoteDataSource: MovieRemoteDataSource,
+    private val networkErrorHandler: NetworkErrorHandler
 ) : MovieRepository {
 
     @OptIn(ExperimentalPagingApi::class)
@@ -30,7 +32,8 @@ class DefaultMovieRepository(
                 source.toMovieSourceData(),
                 db,
                 cacheDataSource,
-                remoteDataSource
+                remoteDataSource,
+                networkErrorHandler
             ),
             pagingSourceFactory = { cacheDataSource.getMovies(source.toString()) }
         ).flow.map { pagingData ->
@@ -41,7 +44,7 @@ class DefaultMovieRepository(
     }
 
     override suspend fun getMovie(id: Int): Result<Movie> {
-        return runCatching {
+        return networkErrorHandler.handle {
             remoteDataSource.getMovie(id).toMovie()
         }
     }

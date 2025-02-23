@@ -9,6 +9,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.hashem.openmovies.feature.data.DefaultMovieRepository
+import com.hashem.openmovies.feature.data.remote.DefaultNetworkErrorHandler
 import com.hashem.openmovies.feature.domain.GetNowPlayingMoviesUseCase
 import com.hashem.openmovies.feature.domain.GetPopularMoviesUseCase
 import com.hashem.openmovies.feature.domain.GetUpcomingMoviesUseCase
@@ -34,7 +35,9 @@ class MoviesViewModel(
 
                 val cache = db.dataSource()
                 val remote = network.dataSource()
-                val repo = DefaultMovieRepository(db, cache, remote)
+                val networkErrorHandler = DefaultNetworkErrorHandler()
+
+                val repo = DefaultMovieRepository(db, cache, remote, networkErrorHandler)
 
                 MoviesViewModel(
                     GetNowPlayingMoviesUseCase(repo),

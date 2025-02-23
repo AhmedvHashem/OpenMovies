@@ -28,12 +28,12 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
+import com.hashem.openmovies.feature.domain.repository.MovieError
 import com.hashem.openmovies.feature.ui.AppRoute
-import com.hashem.openmovies.feature.ui.components.AppEmptyView
+import com.hashem.openmovies.feature.ui.components.AppError
 import com.hashem.openmovies.feature.ui.components.AppErrorView
 import com.hashem.openmovies.feature.ui.components.AppLoadingView
-import retrofit2.HttpException
-import java.io.IOException
+import com.hashem.openmovies.feature.ui.components.toAppError
 
 @Composable
 fun MoviesScreen(
@@ -116,28 +116,10 @@ fun MoviesScreen(
                     }
                 }
 
-                loadState.refresh is LoadState.NotLoading && movies.itemCount < 1 -> {
-                    item {
-                        AppEmptyView()
-                    }
-                }
-
                 loadState.refresh is LoadState.Error -> {
                     item {
                         AppErrorView(
-                            when ((loadState.refresh as LoadState.Error).error) {
-                                is HttpException -> {
-                                    "Oops, something went wrong!"
-                                }
-
-                                is IOException -> {
-                                    "Couldn't reach server, check your internet connection!"
-                                }
-
-                                else -> {
-                                    "Unknown error occurred"
-                                }
-                            }
+                            ((loadState.refresh as LoadState.Error).error as MovieError).toAppError()
                         )
                     }
                 }
@@ -151,19 +133,7 @@ fun MoviesScreen(
                 loadState.append is LoadState.Error -> {
                     item {
                         AppErrorView(
-                            when ((loadState.append as LoadState.Error).error) {
-                                is HttpException -> {
-                                    "Oops, something went wrong!"
-                                }
-
-                                is IOException -> {
-                                    "Couldn't reach server, check your internet connection!"
-                                }
-
-                                else -> {
-                                    "Unknown error occurred"
-                                }
-                            }
+                            ((loadState.append as LoadState.Error).error as MovieError).toAppError()
                         )
                     }
                 }

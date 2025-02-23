@@ -10,16 +10,16 @@ import com.hashem.openmovies.feature.data.cache.MovieCacheDataSource
 import com.hashem.openmovies.feature.data.models.MovieData
 import com.hashem.openmovies.feature.data.models.MovieSourceData
 import com.hashem.openmovies.feature.data.remote.MovieRemoteDataSource
-import kotlinx.coroutines.delay
-import retrofit2.HttpException
-import java.io.IOException
+import com.hashem.openmovies.feature.data.remote.NetworkErrorHandler
+import java.lang.IllegalStateException
 
 @OptIn(ExperimentalPagingApi::class)
 class DefaultMovieMediator(
     private val source: MovieSourceData,
     private val db: RoomDatabase,
     private val cacheDataSource: MovieCacheDataSource,
-    private val remoteDataSource: MovieRemoteDataSource
+    private val remoteDataSource: MovieRemoteDataSource,
+    private val networkErrorHandler: NetworkErrorHandler
 ) : RemoteMediator<Int, MovieData>() {
 
     private var nextPage = 1
@@ -46,19 +46,21 @@ class DefaultMovieMediator(
                 }
             }
 
-            val remoteData = when (source) {
-                MovieSourceData.NowPlaying -> remoteDataSource.getNowPlayerMovies(
-                    page = nextPage,
-                )
+            val remoteData = networkErrorHandler.handle {
+                when (source) {
+                    MovieSourceData.NowPlaying -> remoteDataSource.getNowPlayerMovies(
+                        page = nextPage,
+                    )
 
-                MovieSourceData.Popular -> remoteDataSource.getPopularMovies(
-                    page = nextPage,
-                )
+                    MovieSourceData.Popular -> remoteDataSource.getPopularMovies(
+                        page = nextPage,
+                    )
 
-                MovieSourceData.Upcoming -> remoteDataSource.getUpcomingMovies(
-                    page = nextPage,
-                )
-            }.results.map { it.copy(sources = setOf(source.toString())) }
+                    MovieSourceData.Upcoming -> remoteDataSource.getUpcomingMovies(
+                        page = nextPage,
+                    )
+                }.results.map { it.copy(sources = setOf(source.toString())) }
+            }.getOrThrow()
 
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -70,10 +72,6 @@ class DefaultMovieMediator(
             MediatorResult.Success(
                 endOfPaginationReached = remoteData.isEmpty()
             )
-        } catch (e: IOException) {
-            MediatorResult.Error(e)
-        } catch (e: HttpException) {
-            MediatorResult.Error(e)
         } catch (e: Exception) {
             MediatorResult.Error(e)
         }
