@@ -8,4 +8,6 @@ import kotlinx.coroutines.flow.Flow
 interface MovieRepository {
 
     fun getMovies(source: MovieSource): Flow<PagingData<Movie>>
+
+    suspend fun getMovie(id: Int): Result<Movie>
 }

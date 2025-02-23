@@ -39,4 +39,10 @@ class DefaultMovieRepository(
             }
         }
     }
+
+    override suspend fun getMovie(id: Int): Result<Movie> {
+        return runCatching {
+            remoteDataSource.getMovie(id).toMovie()
+        }
+    }
 }
