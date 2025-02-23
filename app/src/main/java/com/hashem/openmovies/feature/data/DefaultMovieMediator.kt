@@ -10,6 +10,7 @@ import com.hashem.openmovies.feature.data.cache.MovieCacheDataSource
 import com.hashem.openmovies.feature.data.models.MovieData
 import com.hashem.openmovies.feature.data.models.MovieSourceData
 import com.hashem.openmovies.feature.data.remote.MovieRemoteDataSource
+import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -28,6 +29,8 @@ class DefaultMovieMediator(
         state: PagingState<Int, MovieData>
     ): MediatorResult {
         return try {
+            delay(10000)
+
             nextPage = when (loadType) {
                 LoadType.REFRESH -> 1
 
