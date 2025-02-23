@@ -8,8 +8,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -84,8 +82,6 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = AppRoute.Movies.NowPlaying.route,
                         modifier = Modifier.padding(innerPadding),
-                        enterTransition = { fadeIn(animationSpec = tween(0)) },
-                        exitTransition = { fadeOut(animationSpec = tween(0)) }
                     ) {
                         composable(route = AppRoute.Movies.NowPlaying.route) {
                             MoviesScreen(

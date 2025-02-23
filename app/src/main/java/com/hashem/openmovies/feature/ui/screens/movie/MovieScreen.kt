@@ -72,17 +72,14 @@ fun MovieScreen(
             }
 
             is MovieUIState.Success -> {
-                MovieContent(
-                    movie = uiState.movie,
-                    onBackClick = onBackClick
-                )
+                MovieContent(movie = uiState.movie)
             }
         }
     }
 }
 
 @Composable
-private fun MovieContent(movie: Movie, onBackClick: () -> Unit) {
+private fun MovieContent(movie: Movie) {
     val scrollState = rememberScrollState()
 
     Column(
