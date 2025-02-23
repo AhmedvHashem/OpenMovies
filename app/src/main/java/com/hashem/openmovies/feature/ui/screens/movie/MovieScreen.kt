@@ -33,7 +33,6 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.hashem.openmovies.Constants
-import com.hashem.openmovies.feature.domain.models.Movie
 import com.hashem.openmovies.feature.ui.components.AppErrorView
 import com.hashem.openmovies.feature.ui.components.AppLoadingView
 
@@ -79,7 +78,7 @@ fun MovieScreen(
 }
 
 @Composable
-private fun MovieContent(movie: Movie) {
+private fun MovieContent(movie: MovieUIModel) {
     val scrollState = rememberScrollState()
 
     Column(

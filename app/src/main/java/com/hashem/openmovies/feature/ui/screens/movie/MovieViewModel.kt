@@ -44,7 +44,7 @@ class MovieViewModel(
         viewModelScope.launch {
             val result = getMovieUseCase(movieId)
             result.onSuccess { movie ->
-                _uiState.value = MovieUIState.Success(movie)
+                _uiState.value = MovieUIState.Success(movie.toMovieUIModel())
             }.onFailure {
                 _uiState.value = MovieUIState.Error(it.message ?: "Unknown error")
             }
