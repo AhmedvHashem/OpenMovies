@@ -1,5 +1,4 @@
-import com.android.build.api.dsl.ApplicationBuildType
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 
 plugins {
     alias(libs.plugins.android.application)
@@ -21,23 +20,20 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
     }
+
+    ndkSetup()
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            buildConfigSetup(this)
         }
         debug {
             isMinifyEnabled = false
-
-            buildConfigSetup(this)
         }
     }
     compileOptions {
@@ -104,9 +100,12 @@ tasks.withType<Test>().configureEach {
     jvmArgs("-javaagent:${mockitoAgent.asPath}")
 }
 
-fun buildConfigSetup(
-    applicationBuildType: ApplicationBuildType
-) {
-    val apiKey: String = gradleLocalProperties(rootDir, providers).getProperty("API_KEY") ?: ""
-    applicationBuildType.buildConfigField("String", "API_KEY", "\"$apiKey\"")
+fun BaseAppModuleExtension.ndkSetup() {
+    ndkVersion = "28.0.13004108"
+    externalNativeBuild {
+        cmake {
+            path("src/main/cpp/CMakeLists.txt")
+            version = "3.31.5"
+        }
+    }
 }
