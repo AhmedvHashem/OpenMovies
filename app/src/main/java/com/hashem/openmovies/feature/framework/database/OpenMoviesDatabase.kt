@@ -17,14 +17,6 @@ abstract class OpenMoviesDatabase : RoomDatabase() {
     companion object {
         private const val DATABASE_NAME = Constants.DATABASE_NAME
 
-        @Volatile
-        private var INSTANCE: OpenMoviesDatabase? = null
-        fun getInstance(context: Context): OpenMoviesDatabase {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: provideDatabase(context).also { INSTANCE = it }
-            }
-        }
-
         fun provideDatabase(context: Context): OpenMoviesDatabase {
             return Room.databaseBuilder(
                 context,
