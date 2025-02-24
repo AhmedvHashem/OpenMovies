@@ -17,6 +17,10 @@
 - **Mocking**: Mockito
 - **asserting**: Truth
 
+## 📃 Work in progress
+- **Unit Tests**: in-progress, but similar tests can be found [here](https://github.com/AhmedvHashem/OpenDictionary/tree/main/app/src/test/java/com/hashem/opendictionary)
+- **UI Tests**: in-progress
+
 ## 📊 Arch Diagram
 **a high-level overview**
 
