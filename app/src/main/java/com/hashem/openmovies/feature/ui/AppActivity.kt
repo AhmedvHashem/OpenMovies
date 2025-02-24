@@ -27,7 +27,9 @@ import com.hashem.openmovies.feature.ui.components.AppNavigationBar
 import com.hashem.openmovies.feature.ui.screens.movie.MovieScreen
 import com.hashem.openmovies.feature.ui.screens.movies.MoviesScreen
 import com.hashem.openmovies.feature.ui.theme.OpenMoviesTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {

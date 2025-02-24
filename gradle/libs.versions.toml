@@ -16,7 +16,7 @@ okhttp = "4.12.0"
 room = "2.6.1"
 coil = "3.1.0"
 
-hiltAndroid = "2.55"
+hilt = "2.55"
 
 junit = "4.13.2"
 kotlinxCoroutinesTest = "1.10.1"
@@ -55,8 +55,8 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 coil = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil" }
 
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltAndroid" }
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 
 testing-junit = { group = "junit", name = "junit", version.ref = "junit" }
 testing-kotlin = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -78,3 +78,4 @@ kapt = { id = "kotlin-kapt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
