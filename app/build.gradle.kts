@@ -3,6 +3,7 @@ import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kapt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
@@ -75,6 +76,9 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.coil)
     implementation(libs.coil.okhttp)
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     debugImplementation(platform(libs.androidx.compose.bom))
     debugImplementation(libs.androidx.ui.tooling)
