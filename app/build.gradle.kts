@@ -2,7 +2,6 @@ import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kapt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
@@ -80,7 +79,7 @@ dependencies {
     implementation(libs.coil.okhttp)
 
     implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     debugImplementation(platform(libs.androidx.compose.bom))
     debugImplementation(libs.androidx.ui.tooling)
@@ -100,10 +99,6 @@ dependencies {
     androidTestImplementation(libs.testing.androidx.espresso)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.testing.androidx.compose)
-}
-
-kapt {
-    correctErrorTypes = true
 }
 
 tasks.withType<Test>().configureEach {
