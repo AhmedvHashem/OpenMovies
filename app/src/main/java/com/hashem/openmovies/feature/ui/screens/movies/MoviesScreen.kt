@@ -13,6 +13,9 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,6 +49,12 @@ fun MoviesScreen(
         AppRoute.Movies.NowPlaying -> uiState.nowPlayingMovies.collectAsLazyPagingItems()
         AppRoute.Movies.Popular -> uiState.popularMovies.collectAsLazyPagingItems()
         AppRoute.Movies.Upcoming -> uiState.upcomingMovies.collectAsLazyPagingItems()
+    }
+
+    SideEffect { }
+    LaunchedEffect(Unit) { }
+    DisposableEffect(Unit) {
+        onDispose { }
     }
 
     LazyColumn(

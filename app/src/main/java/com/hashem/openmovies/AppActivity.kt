@@ -1,6 +1,9 @@
 package com.hashem.openmovies
 
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -34,6 +37,19 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        TextView(this).apply {
+            text = "Hello, World!"
+            setContentView(this)
+        }.setOnClickListener {
+            Toast.makeText(
+                this@MainActivity,
+                "Hello, World!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+
         enableEdgeToEdge()
         setContent {
             OpenMoviesTheme {
