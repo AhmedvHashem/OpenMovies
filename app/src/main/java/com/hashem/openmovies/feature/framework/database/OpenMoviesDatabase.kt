@@ -25,7 +25,7 @@ abstract class OpenMoviesDatabase : RoomDatabase() {
             }
         }
 
-        private fun provideDatabase(context: Context): OpenMoviesDatabase {
+        fun provideDatabase(context: Context): OpenMoviesDatabase {
             return Room.databaseBuilder(
                 context,
                 OpenMoviesDatabase::class.java, DATABASE_NAME

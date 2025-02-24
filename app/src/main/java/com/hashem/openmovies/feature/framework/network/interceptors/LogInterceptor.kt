@@ -1,17 +1,16 @@
 package com.hashem.openmovies.feature.framework.network.interceptors
 
-import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 
 object LogInterceptor {
 
-    fun debug(): Interceptor {
+    fun debug(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         return loggingInterceptor
     }
 
-    fun release(): Interceptor {
+    fun release(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
         return loggingInterceptor

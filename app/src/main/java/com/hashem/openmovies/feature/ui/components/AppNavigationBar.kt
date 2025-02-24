@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import com.hashem.openmovies.feature.ui.AppRoute
+import com.hashem.openmovies.AppRoute
 
 @Composable
 fun AppNavigationBar(

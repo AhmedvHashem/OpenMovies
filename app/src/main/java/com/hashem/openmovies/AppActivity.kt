@@ -1,4 +1,4 @@
-package com.hashem.openmovies.feature.ui
+package com.hashem.openmovies
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

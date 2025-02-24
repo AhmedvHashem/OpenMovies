@@ -21,16 +21,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
+import com.hashem.openmovies.AppRoute
 import com.hashem.openmovies.feature.domain.repository.MovieError
-import com.hashem.openmovies.feature.ui.AppRoute
-import com.hashem.openmovies.feature.ui.components.AppError
 import com.hashem.openmovies.feature.ui.components.AppErrorView
 import com.hashem.openmovies.feature.ui.components.AppLoadingView
 import com.hashem.openmovies.feature.ui.components.toAppError
@@ -38,7 +37,7 @@ import com.hashem.openmovies.feature.ui.components.toAppError
 @Composable
 fun MoviesScreen(
     route: AppRoute.Movies,
-    viewModel: MoviesViewModel = viewModel<MoviesViewModel>(factory = MoviesViewModel.Factory),
+    viewModel: MoviesViewModel = hiltViewModel(),
     onMovieClick: (Int) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()

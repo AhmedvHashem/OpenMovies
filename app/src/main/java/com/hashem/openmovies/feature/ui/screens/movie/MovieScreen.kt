@@ -27,8 +27,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.request.crossfade
@@ -38,7 +38,7 @@ import com.hashem.openmovies.feature.ui.components.AppLoadingView
 @Composable
 fun MovieScreen(
     movieId: Int,
-    viewModel: MovieViewModel = viewModel<MovieViewModel>(factory = MovieViewModel.Factory),
+    viewModel: MovieViewModel = hiltViewModel(),
     onBackClick: () -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value

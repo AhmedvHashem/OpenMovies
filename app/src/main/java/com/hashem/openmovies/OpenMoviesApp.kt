@@ -26,7 +26,11 @@ class OpenMoviesApp : Application() {
     private fun setStrictModePolicy() {
         if (isDebuggable()) {
             StrictMode.setThreadPolicy(
-                Builder().detectAll().penaltyLog().penaltyDeath().build(),
+                Builder()
+                    .detectNetwork()
+                    .detectDiskWrites()
+                    .penaltyLog()
+                    .build(),
             )
         }
     }

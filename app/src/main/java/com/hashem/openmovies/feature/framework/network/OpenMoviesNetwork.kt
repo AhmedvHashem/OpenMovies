@@ -20,7 +20,6 @@ abstract class OpenMoviesNetwork {
             }
         }
 
-
         private fun provideNetwork(): OpenMoviesNetwork {
             val client: OkHttpClient = OkHttpClient.Builder()
                 .addInterceptor(AuthInterceptor(Constants.API_KEY))
@@ -33,6 +32,14 @@ abstract class OpenMoviesNetwork {
                 .addConverterFactory(Converter.json())
                 .build()
 
+            return object : OpenMoviesNetwork() {
+                override fun dataSource(): MovieRemoteDataSource {
+                    return retrofit.create(MovieRemoteDataSource::class.java)
+                }
+            }
+        }
+
+        fun provideNetwork(retrofit: Retrofit): OpenMoviesNetwork {
             return object : OpenMoviesNetwork() {
                 override fun dataSource(): MovieRemoteDataSource {
                     return retrofit.create(MovieRemoteDataSource::class.java)

@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.paging)
     implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.serialization)

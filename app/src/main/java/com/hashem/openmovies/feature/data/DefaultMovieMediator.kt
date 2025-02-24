@@ -11,7 +11,6 @@ import com.hashem.openmovies.feature.data.models.MovieData
 import com.hashem.openmovies.feature.data.models.MovieSourceData
 import com.hashem.openmovies.feature.data.remote.MovieRemoteDataSource
 import com.hashem.openmovies.feature.data.remote.NetworkErrorHandler
-import java.lang.IllegalStateException
 
 @OptIn(ExperimentalPagingApi::class)
 class DefaultMovieMediator(

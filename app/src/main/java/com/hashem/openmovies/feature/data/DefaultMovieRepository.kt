@@ -5,7 +5,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import androidx.room.RoomDatabase
 import com.hashem.openmovies.feature.data.cache.MovieCacheDataSource
 import com.hashem.openmovies.feature.data.models.toMovie
 import com.hashem.openmovies.feature.data.models.toMovieSourceData
@@ -14,11 +13,15 @@ import com.hashem.openmovies.feature.data.remote.NetworkErrorHandler
 import com.hashem.openmovies.feature.domain.models.Movie
 import com.hashem.openmovies.feature.domain.models.MovieSource
 import com.hashem.openmovies.feature.domain.repository.MovieRepository
+import com.hashem.openmovies.feature.framework.database.OpenMoviesDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DefaultMovieRepository(
-    private val db: RoomDatabase,
+@Singleton
+class DefaultMovieRepository @Inject constructor(
+    private val db: OpenMoviesDatabase,
     private val cacheDataSource: MovieCacheDataSource,
     private val remoteDataSource: MovieRemoteDataSource,
     private val networkErrorHandler: NetworkErrorHandler
