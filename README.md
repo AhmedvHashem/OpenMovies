@@ -6,14 +6,20 @@
 ## 📚 Tech Stack
 - **Programming Language**: Kotlin
 - **Architecture**: Clean Architecture with MVVM (Model-View-ViewModel) pattern
-- **UI**: Jetpack Compose for UI
+- **UI**: Compose
+- **Navigation**: Compose Navigation
 - **Concurrency**: Kotlin Coroutines for asynchronous operations
 - **Networking**: Retrofit, Kotlin Serialization 
 - **Database**: Room
+- **Dependency Injection**: Hilt, Hilt Compose Navigation
 - **Build Tool**: Gradle with Kotlin DSL
 - **Testing**: Kotlin Test
 - **Mocking**: Mockito
 - **asserting**: Truth
+
+## 📃 Work in progress
+- **Unit Tests**: in-progress, but similar tests can be found [here](https://github.com/AhmedvHashem/OpenDictionary/tree/main/app/src/test/java/com/hashem/opendictionary)
+- **UI Tests**: in-progress
 
 ## 📊 Arch Diagram
 **a high-level overview**
