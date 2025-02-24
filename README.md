@@ -6,10 +6,12 @@
 ## 📚 Tech Stack
 - **Programming Language**: Kotlin
 - **Architecture**: Clean Architecture with MVVM (Model-View-ViewModel) pattern
-- **UI**: Jetpack Compose for UI
+- **UI**: Compose
+- **Navigation**: Compose Navigation
 - **Concurrency**: Kotlin Coroutines for asynchronous operations
 - **Networking**: Retrofit, Kotlin Serialization 
 - **Database**: Room
+- **Dependency Injection**: Hilt, Hilt Compose Navigation
 - **Build Tool**: Gradle with Kotlin DSL
 - **Testing**: Kotlin Test
 - **Mocking**: Mockito
