@@ -10,7 +10,7 @@
 - **Navigation**: Compose Navigation
 - **Concurrency**: Kotlin Coroutines for asynchronous operations
 - **Networking**: Retrofit, Kotlin Serialization 
-- **Database**: Room
+- **Database**: Room and Paging
 - **Dependency Injection**: Hilt, Hilt Compose Navigation
 - **Build Tool**: Gradle with Kotlin DSL
 - **Testing**: Kotlin Test
