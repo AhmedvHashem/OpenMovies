@@ -19,6 +19,13 @@ jobs:
         java-version: '23'
         distribution: 'temurin'
         cache: gradle
+    - name: set up NDK
+      id: setup-ndk
+      uses: nttld/setup-ndk@v1
+      with:
+        ndk-version: r28e
+        link-to-sdk: true
+
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
