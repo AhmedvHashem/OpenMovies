@@ -23,7 +23,7 @@ jobs:
       id: setup-ndk
       uses: nttld/setup-ndk@v1
       with:
-        ndk-version: r28e
+        ndk-version: r28
         link-to-sdk: true
 
 
