@@ -1,13 +1,9 @@
 package com.hashem.openmovies
 
+import com.hashem.constants.Constants
+
 object Constants {
-    init {
-        System.loadLibrary("constants")
-    }
-
-    private external fun getApiKey(): String
-
-    val API_KEY = getApiKey()
+    val API_KEY = Constants.getApiKey()
 
     const val DATABASE_NAME = "open-movies-database"
     const val DATABASE_VERSION = 1

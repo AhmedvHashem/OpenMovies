@@ -28,7 +28,7 @@ import com.hashem.openmovies.feature.ui.screens.movie.MovieScreen
 import com.hashem.openmovies.feature.ui.screens.movies.MoviesScreen
 import com.hashem.openmovies.feature.ui.theme.OpenMoviesTheme
 
-class MainActivity : ComponentActivity() {
+class AppActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

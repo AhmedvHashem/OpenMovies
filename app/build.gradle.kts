@@ -1,4 +1,4 @@
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
@@ -13,7 +13,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.banquemisr.challenge05"
+        applicationId = "com.hashem.openmovies"
         minSdk = 29
         targetSdk = 35
         versionCode = 1
@@ -22,11 +22,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    ndkSetup()
-
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
+            isCrunchPngs = true
+
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -36,21 +37,24 @@ android {
             isMinifyEnabled = false
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
     buildFeatures {
         buildConfig = true
         compose = true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JvmTarget.JVM_17.target
     }
 }
 
 val mockitoAgent = configurations.create("mockitoAgent")
 dependencies {
+    implementation(project(":constants"))
+
     implementation(libs.kotlin.serialization)
 
     implementation(libs.androidx.core.ktx)
@@ -98,14 +102,4 @@ dependencies {
 
 tasks.withType<Test>().configureEach {
     jvmArgs("-javaagent:${mockitoAgent.asPath}")
-}
-
-fun BaseAppModuleExtension.ndkSetup() {
-    ndkVersion = "28.0.13004108"
-    externalNativeBuild {
-        cmake {
-            path("src/main/cpp/CMakeLists.txt")
-            version = "3.31.5"
-        }
-    }
 }

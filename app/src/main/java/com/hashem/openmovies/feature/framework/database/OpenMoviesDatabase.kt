@@ -9,6 +9,7 @@ import com.hashem.openmovies.Constants
 import com.hashem.openmovies.feature.data.cache.MovieCacheDataSource
 import com.hashem.openmovies.feature.data.models.MovieData
 
+
 @Database(entities = [MovieData::class], exportSchema = false, version = Constants.DATABASE_VERSION)
 @TypeConverters(Converter::class)
 abstract class OpenMoviesDatabase : RoomDatabase() {
@@ -28,7 +29,8 @@ abstract class OpenMoviesDatabase : RoomDatabase() {
         private fun provideDatabase(context: Context): OpenMoviesDatabase {
             return Room.databaseBuilder(
                 context,
-                OpenMoviesDatabase::class.java, DATABASE_NAME
+                OpenMoviesDatabase::class.java,
+                DATABASE_NAME
             ).build()
         }
     }

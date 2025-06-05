@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "OpenMovies"
 include(":app")
+include(":constants")
