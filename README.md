@@ -16,6 +16,7 @@
 - **asserting**: Truth
 
 ## 📊 Arch Diagram
+https://deepwiki.com/AhmedvHashem/OpenMovies/
 **a high-level overview**
 
 <img width="1080" alt="arch" src="https://github.com/user-attachments/assets/710b3f4f-8584-4fb9-89b2-c3ea02cd17bd" />
